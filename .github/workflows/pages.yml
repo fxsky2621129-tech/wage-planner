@@ -27,7 +27,8 @@ jobs:
       - name: Prepare public files
         run: |
           mkdir public-site
-          cp index.html style.css app.js engine.js attendance.js attendance.css public-site/
+          cp index.html style.css app.js engine.js attendance.js attendance.css pwa.js sw.js manifest.webmanifest public-site/
+          cp -r icons public-site/
       - uses: actions/upload-pages-artifact@v4
         with:
           path: public-site

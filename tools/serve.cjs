@@ -1,4 +1,4 @@
 const http=require('node:http'),fs=require('node:fs'),path=require('node:path');
-const root=path.resolve(__dirname,'..');const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8'};
-const allowed=new Set(['index.html','engine.js','app.js','style.css','attendance.js','attendance.css']);
+const root=path.resolve(__dirname,'..');const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.webmanifest':'application/manifest+json','.png':'image/png'};
+const allowed=new Set(['index.html','engine.js','app.js','style.css','attendance.js','attendance.css','pwa.js','sw.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/apple-touch-icon.png']);
 http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname.slice(1)||'index.html';if(!allowed.has(name)){res.writeHead(404);res.end('Not found');return;}res.writeHead(200,{'Content-Type':types[path.extname(name)],'Cache-Control':'no-store'});res.end(fs.readFileSync(path.join(root,name)));}).listen(4173,'127.0.0.1',()=>console.log('http://127.0.0.1:4173'));
